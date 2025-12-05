@@ -3,5 +3,5 @@ kind: Kustomization
 resources:
 - ocirepository.yaml
 - helmrelease.yaml
-- clulsterissuer.yaml
+- clusterissuer.yaml
 - namespace.yaml
