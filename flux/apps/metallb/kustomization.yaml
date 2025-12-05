@@ -7,6 +7,7 @@ metadata:
   name: metallb-system
 
 resources:
+  - namespace.yaml
   - helmrepository.yaml
   - helmrelease.yaml
 ---
