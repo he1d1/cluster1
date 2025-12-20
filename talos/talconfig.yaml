@@ -80,5 +80,3 @@ controlPlane:
           interfaces:
             - interface: end0
               dhcp: true
-        nodeLabels:
-          node.kubernetes.io/exclude-from-external-load-balancers: $$patch:delete
