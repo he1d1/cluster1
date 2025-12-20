@@ -80,5 +80,4 @@ controlPlane:
           interfaces:
             - interface: end0
               dhcp: true
-    - op: remove
-      path: /machine/nodeLabels/node.kubernetes.io~1exclude-from-external-load-balancers
+        nodeLabels:
