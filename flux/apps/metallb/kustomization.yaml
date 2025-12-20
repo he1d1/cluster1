@@ -3,23 +3,11 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 namespace: metallb-system
-metadata:
-  name: metallb-system
 
 resources:
   - namespace.yaml
   - helmrepository.yaml
   - helmrelease.yaml
----
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-metadata:
-  name: config
-resources:
-  - ipaddresspool.yaml
-  - l2advertisement.yaml
-  - test.yaml
-spec:
-  path: ./config
-  dependsOn:
-    - name: metallb-system
+  - config/ipaddresspool.yaml
+  - config/l2advertisement.yaml
+  - config/test.yaml
