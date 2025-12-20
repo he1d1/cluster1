@@ -80,6 +80,5 @@ controlPlane:
           interfaces:
             - interface: end0
               dhcp: true
-        # Remove the default exclude-from-external-load-balancers label
-        # by setting nodeLabels to empty, which will override the default
-        nodeLabels: {}
+        nodeLabels:
+          node.kubernetes.io/exclude-from-external-load-balancers: $patch:delete
