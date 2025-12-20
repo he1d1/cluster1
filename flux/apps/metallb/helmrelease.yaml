@@ -23,4 +23,4 @@ spec:
       logLevel: warn
       memberlist:
         enabled: true
-        nodeSelector: kubernetes.io/hostname
+        mlBindAddrOverride: "$(METALLB_HOST)"
