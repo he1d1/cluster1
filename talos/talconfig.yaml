@@ -80,16 +80,18 @@ controlPlane:
           interfaces:
             - interface: end0
               dhcp: true
-  ingressFirewall:
-    - portSelector:
-        ports:
-          - 7946
-        protocol: tcp
-      ingress:
-        - subnet: 192.168.1.0/24
-    - portSelector:
-        ports:
-          - 7946
-        protocol: udp
-      ingress:
-        - subnet: 192.168.1.0/24
+    - op: add
+      path: /machine/network/ingress
+      value:
+        - portSelector:
+            ports:
+              - 7946
+            protocol: tcp
+          ingress:
+            - subnet: 192.168.1.0/24
+        - portSelector:
+            ports:
+              - 7946
+            protocol: udp
+          ingress:
+            - subnet: 192.168.1.0/24
