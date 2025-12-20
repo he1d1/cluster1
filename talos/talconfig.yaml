@@ -80,4 +80,6 @@ controlPlane:
           interfaces:
             - interface: end0
               dhcp: true
-        nodeLabels: null
+        # Remove the default exclude-from-external-load-balancers label
+        # by setting nodeLabels to empty, which will override the default
+        nodeLabels: {}
