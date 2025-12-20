@@ -22,4 +22,5 @@ spec:
     speaker:
       logLevel: warn
       memberlist:
-        enabled: false
+        enabled: true
+        nodeSelector: kubernetes.io/hostname
