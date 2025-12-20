@@ -21,3 +21,5 @@ spec:
   values:
     speaker:
       logLevel: warn
+      memberlist:
+        enabled: false
