@@ -23,3 +23,4 @@ spec:
       logLevel: warn
       memberlist:
         enabled: true
+        bindAddr: $(METALLB_HOST)
