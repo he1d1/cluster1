@@ -23,4 +23,3 @@ spec:
       logLevel: warn
       memberlist:
         enabled: true
-        mlBindAddrOverride: "$(METALLB_HOST)"
