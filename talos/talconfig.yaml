@@ -80,3 +80,35 @@ controlPlane:
           interfaces:
             - interface: end0
               dhcp: true
+        firewall:
+          inbound:
+            - source: 192.168.1.21
+              protocol: tcp
+              ports:
+                start: 7946
+                end: 7946
+            - source: 192.168.1.21
+              protocol: udp
+              ports:
+                start: 7946
+                end: 7946
+            - source: 192.168.1.22
+              protocol: tcp
+              ports:
+                start: 7946
+                end: 7946
+            - source: 192.168.1.22
+              protocol: udp
+              ports:
+                start: 7946
+                end: 7946
+            - source: 192.168.1.23
+              protocol: tcp
+              ports:
+                start: 7946
+                end: 7946
+            - source: 192.168.1.23
+              protocol: udp
+              ports:
+                start: 7946
+                end: 7946
