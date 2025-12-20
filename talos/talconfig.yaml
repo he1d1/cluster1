@@ -80,4 +80,4 @@ controlPlane:
           interfaces:
             - interface: end0
               dhcp: true
-        nodeLabels: {}
+        nodeLabels: null
