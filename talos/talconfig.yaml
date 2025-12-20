@@ -80,27 +80,16 @@ controlPlane:
           interfaces:
             - interface: end0
               dhcp: true
-    - |-
-      apiVersion: v1alpha1
-      kind: NetworkRuleConfig
-      metadata:
-        name: metallb-memberlist-tcp
-      spec:
-        portSelector:
-          ports:
-            - 7946
-          protocol: tcp
-        ingress:
-          - subnet: 192.168.1.0/24
-    - |-
-      apiVersion: v1alpha1
-      kind: NetworkRuleConfig
-      metadata:
-        name: metallb-memberlist-udp
-      spec:
-        portSelector:
-          ports:
-            - 7946
-          protocol: udp
-        ingress:
-          - subnet: 192.168.1.0/24
+  ingressFirewall:
+    - portSelector:
+        ports:
+          - 7946
+        protocol: tcp
+      ingress:
+        - subnet: 192.168.1.0/24
+    - portSelector:
+        ports:
+          - 7946
+        protocol: udp
+      ingress:
+        - subnet: 192.168.1.0/24
