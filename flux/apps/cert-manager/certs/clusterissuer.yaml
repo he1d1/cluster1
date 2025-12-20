@@ -3,16 +3,14 @@ kind: ClusterIssuer
 metadata:
   name: letsencrypt
 spec:
-  dependsOn:
-    - name: cert-manager
   acme:
     email: heidi+letsencrypt@heidi.codes
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: letsencrypt-traefik
     solvers:
-    - dns01:
-        cloudflare:
-          apiTokenSecretRef:
-            name: cloudflare-api-token-secret
-            key: api-token
+      - dns01:
+          cloudflare:
+            apiTokenSecretRef:
+              name: cloudflare-api-token-secret
+              key: api-token
