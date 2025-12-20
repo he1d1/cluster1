@@ -22,5 +22,4 @@ spec:
     speaker:
       logLevel: warn
       memberlist:
-        enabled: true
-        bindAddr: $(METALLB_HOST)
+        enabled: false
