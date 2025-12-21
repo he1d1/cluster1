@@ -19,6 +19,7 @@ data:
         cluster1.internal.heidi.codes: 192.168.1.100
       zone: |
         $ORIGIN cluster1.internal.heidi.codes.
+        $TTL 3600
         * A 192.168.1.100
     ports:
       dns: 53
