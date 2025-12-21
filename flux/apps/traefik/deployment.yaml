@@ -30,10 +30,8 @@ spec:
             - "--api=true"
             - "--api.dashboard=true"
             - "--ping=true"
-            - "--providers.kubernetescrd"
-            - "--providers.kubernetescrd.allowCrossNamespace=true"
-            - "--providers.kubernetesgateway"
-            - "--providers.kubernetesgateway.allowCrossNamespace=true"
+            - "--providers.kubernetescrd=true"
+            - "--providers.kubernetesgateway=true"
           readinessProbe:
             httpGet:
               path: /ping
