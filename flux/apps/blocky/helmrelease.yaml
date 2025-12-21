@@ -1,0 +1,44 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: blocky
+  namespace: blocky
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: blocky
+      version: "0.4.x"
+      sourceRef:
+        kind: HelmRepository
+        name: blocky
+        namespace: blocky
+  values:
+    service:
+      dns:
+        type: LoadBalancer
+        port: 53
+      http:
+        type: ClusterIP
+        port: 4000
+    config:
+      upstreams:
+        groups:
+          default:
+            - https://dns.cloudflare.com/dns-query
+            - https://dns.google/dns-query
+      blocking:
+        denylists:
+          ads:
+            - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+        clientGroupsBlock:
+          default:
+            - ads
+      customDNS:
+        mapping:
+          test.example.com: 192.168.1.100
+      ports:
+        dns: 53
+        http: 4000
+      log:
+        level: info
