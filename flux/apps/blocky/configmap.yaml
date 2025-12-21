@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: blocky-config
+data:
+  config.yml: |
+    upstreams:
+      groups:
+        default:
+          - https://dns.cloudflare.com/dns-query
+          - https://dns.google/dns-query
+    blocking:
+      denylists:
+        ads:
+          - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+      clientGroupsBlock:
+        default:
+          - ads
+    customDNS:
+      mapping:
+        test.example.com: 192.168.1.100
+    ports:
+      dns: 53
+      http: 4000
+    log:
+      level: info
