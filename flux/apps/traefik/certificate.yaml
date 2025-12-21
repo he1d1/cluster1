@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cluster1-wildcard
+  namespace: traefik
+spec:
+  secretName: cluster1-wildcard-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+    - "*.cluster1.internal.heidi.codes"
+    - "cluster1.internal.heidi.codes"

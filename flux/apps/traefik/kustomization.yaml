@@ -12,3 +12,4 @@ resources:
   - serviceaccount.yaml
   - gatewayclass.yaml
   - gateway.yaml
+  - certificate.yaml
