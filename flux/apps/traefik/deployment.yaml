@@ -22,7 +22,7 @@ spec:
       terminationGracePeriodSeconds: 60
       containers:
         - name: traefik
-          image: traefik:2.5.4
+          image: traefik:v3.1.4
           args:
             - "--entryPoints.web.address=:8000/tcp"
             - "--entryPoints.websecure.address=:8443/tcp"
@@ -32,6 +32,8 @@ spec:
             - "--ping=true"
             - "--providers.kubernetescrd"
             - "--providers.kubernetescrd.allowCrossNamespace=true"
+            - "--providers.kubernetesgateway"
+            - "--providers.kubernetesgateway.allowCrossNamespace=true"
           readinessProbe:
             httpGet:
               path: /ping

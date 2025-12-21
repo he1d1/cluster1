@@ -4,7 +4,7 @@ metadata:
   name: test-service
   namespace: metallb-system
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: test
   ports:
@@ -21,6 +21,23 @@ metadata:
 spec:
   containers:
     - name: nginx
-      image: nginx:latest
+      image: nginx:1.27-alpine
       ports:
         - containerPort: 80
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: test-route
+  namespace: metallb-system
+spec:
+  parentRefs:
+    - name: traefik
+      namespace: traefik
+      kind: Gateway
+  hostnames:
+    - "test.example.com"
+  rules:
+    - backendRefs:
+        - name: test-service
+          port: 80
