@@ -6,10 +6,10 @@ spec:
   gatewayClassName: traefik
   listeners:
     - name: web
-      port: 80
+      port: 8000
       protocol: HTTP
     - name: websecure
-      port: 443
+      port: 8443
       protocol: HTTPS
       tls:
         mode: Terminate
