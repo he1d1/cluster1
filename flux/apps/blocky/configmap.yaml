@@ -9,16 +9,17 @@ data:
         default:
           - https://dns.cloudflare.com/dns-query
           - https://dns.google/dns-query
-    blocking:
-      denylists:
-        ads:
-          - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
-      clientGroupsBlock:
-        default:
-          - ads
     customDNS:
       mapping:
-        test.example.com: 192.168.1.100
+        # Nodes
+        pi1.internal.heidi.codes: 192.168.1.21
+        pi2.internal.heidi.codes: 192.168.1.22
+        pi3.internal.heidi.codes: 192.168.1.23
+        # Cluster services (Traefik)
+        cluster1.internal.heidi.codes: 192.168.1.100
+      zone: |
+        $ORIGIN cluster1.internal.heidi.codes.
+        * A 192.168.1.100
     ports:
       dns: 53
       http: 4000

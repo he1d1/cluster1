@@ -36,7 +36,7 @@ spec:
       namespace: traefik
       kind: Gateway
   hostnames:
-    - "test.example.com"
+    - "test.cluster1.internal.heidi.codes"
   rules:
     - backendRefs:
         - name: test-service
