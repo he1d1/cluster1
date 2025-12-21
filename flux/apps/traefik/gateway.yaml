@@ -8,3 +8,6 @@ spec:
     - name: web
       port: 8000
       protocol: HTTP
+      allowedRoutes:
+        namespaces:
+          from: All
