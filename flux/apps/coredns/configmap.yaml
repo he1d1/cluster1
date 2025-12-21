@@ -16,7 +16,7 @@ data:
         }
         prometheus :9153
 
-        kubernetes cluster1.heidi.codes in-addr.arpa ip6.arpa {
+        kubernetes cluster1.internal.heidi.codes in-addr.arpa ip6.arpa {
             pods insecure
             fallthrough in-addr.arpa ip6.arpa
             ttl 30
