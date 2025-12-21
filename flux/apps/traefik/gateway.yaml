@@ -8,11 +8,3 @@ spec:
     - name: web
       port: 8000
       protocol: HTTP
-    - name: websecure
-      port: 8443
-      protocol: HTTPS
-      tls:
-        mode: Terminate
-        certificateRefs:
-          - name: traefik-tls
-            kind: Secret
