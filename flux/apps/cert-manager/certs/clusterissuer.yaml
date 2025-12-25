@@ -6,6 +6,7 @@ spec:
   acme:
     email: heidi+letsencrypt@heidi.codes
     server: https://acme-v02.api.letsencrypt.org/directory
+    skipTLSVerify: true
     privateKeySecretRef:
       name: letsencrypt-traefik
     solvers:
