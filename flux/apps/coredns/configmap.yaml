@@ -18,7 +18,7 @@ data:
 
         kubernetes cluster1.internal.heidi.codes in-addr.arpa ip6.arpa {
             pods insecure
-            fallthrough in-addr.arpa ip6.arpa
+            fallthrough
             ttl 30
         }
         forward . 1.1.1.1 8.8.8.8 {
