@@ -6,5 +6,4 @@ resources:
   - metallb
   - traefik
   - cert-manager
-  - blocky
   - coredns
