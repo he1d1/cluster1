@@ -8,4 +8,5 @@ resources:
   - cert-manager
   - coredns
   - monitoring
+  - promtail
   - test
