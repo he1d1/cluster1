@@ -12,3 +12,4 @@ resources:
   - certs/clusterissuer.yaml
   - origin-ca-helmrepo.yaml
   - origin-ca-helmrelease.yaml
+  - networkpolicy.yaml

@@ -1,0 +1,34 @@
+---
+# Allow Longhorn components to communicate with each other
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: longhorn-internal
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    # Allow all traffic within longhorn-system namespace
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: longhorn-system
+    # Allow traffic from any namespace (for PV mounts)
+    - from:
+        - namespaceSelector: {}
+      ports:
+        - protocol: TCP
+          port: 10000
+        - protocol: TCP
+          port: 10001
+        - protocol: TCP
+          port: 10002
+        - protocol: TCP
+          port: 10003
+        - protocol: TCP
+          port: 10004
+  egress:
+    # Allow all egress for storage operations
+    - {}

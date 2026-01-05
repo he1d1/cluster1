@@ -13,3 +13,5 @@ resources:
   - gatewayclass.yaml
   - gateway.yaml
   - certificate.yaml
+  - pdb.yaml
+  - networkpolicy.yaml

@@ -1,14 +1,11 @@
----
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: metallb-system
+namespace: monitoring
 
 resources:
   - namespace.yaml
   - helmrepository.yaml
   - helmrelease.yaml
-  - config/ipaddresspool.yaml
-  - config/l2advertisement.yaml
-  - config/test.yaml
+  - httproute.yaml
   - networkpolicy.yaml

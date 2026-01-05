@@ -1,0 +1,32 @@
+---
+# Allow cert-manager to communicate externally for ACME challenges
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: cert-manager
+spec:
+  podSelector: {}
+  policyTypes:
+    - Egress
+  egress:
+    # Allow DNS lookups
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+      ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
+    # Allow HTTPS for ACME and Cloudflare API
+    - ports:
+        - protocol: TCP
+          port: 443
+    # Allow communication with Kubernetes API
+    - to:
+        - ipBlock:
+            cidr: 10.96.0.0/12  # Service CIDR
+      ports:
+        - protocol: TCP
+          port: 443
