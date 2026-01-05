@@ -6,7 +6,7 @@ metadata:
   name: media-data
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   storageClassName: longhorn
   resources:
     requests:
@@ -19,7 +19,7 @@ metadata:
   name: downloads
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   storageClassName: longhorn
   resources:
     requests:
