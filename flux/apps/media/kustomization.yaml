@@ -10,4 +10,4 @@ resources:
   - radarr.yaml
   - prowlarr.yaml
   - jellyfin.yaml
-  - qbittorrent.yaml
+  - nzbget.yaml

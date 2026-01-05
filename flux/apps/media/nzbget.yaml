@@ -2,31 +2,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: qbittorrent
+  name: nzbget
   labels:
-    app: qbittorrent
+    app: nzbget
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: qbittorrent
+      app: nzbget
   template:
     metadata:
       labels:
-        app: qbittorrent
+        app: nzbget
     spec:
       containers:
-        - name: qbittorrent
-          image: lscr.io/linuxserver/qbittorrent:latest
+        - name: nzbget
+          image: lscr.io/linuxserver/nzbget:latest
           ports:
-            - containerPort: 8080
-              name: web
-            - containerPort: 6881
-              name: torrent-tcp
-              protocol: TCP
-            - containerPort: 6881
-              name: torrent-udp
-              protocol: UDP
+            - containerPort: 6789
           env:
             - name: PUID
               value: "1000"
@@ -34,14 +27,12 @@ spec:
               value: "1000"
             - name: TZ
               value: "UTC"
-            - name: WEBUI_PORT
-              value: "8080"
           resources:
             requests:
-              cpu: 50m
-              memory: 256Mi
+              cpu: 25m
+              memory: 128Mi
             limits:
-              memory: 1Gi
+              memory: 512Mi
           volumeMounts:
             - name: config
               mountPath: /config
@@ -50,7 +41,7 @@ spec:
       volumes:
         - name: config
           persistentVolumeClaim:
-            claimName: qbittorrent-config
+            claimName: nzbget-config
         - name: downloads
           persistentVolumeClaim:
             claimName: downloads
@@ -58,7 +49,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: qbittorrent-config
+  name: nzbget-config
 spec:
   accessModes:
     - ReadWriteOnce
@@ -70,27 +61,26 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: qbittorrent
+  name: nzbget
 spec:
   selector:
-    app: qbittorrent
+    app: nzbget
   ports:
     - port: 80
-      targetPort: 8080
-      name: web
+      targetPort: 6789
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: qbittorrent
+  name: nzbget
 spec:
   parentRefs:
     - name: traefik
       namespace: traefik
       sectionName: websecure
   hostnames:
-    - qbittorrent.apps.cluster1.internal.heidi.codes
+    - nzbget.apps.cluster1.internal.heidi.codes
   rules:
     - backendRefs:
-        - name: qbittorrent
+        - name: nzbget
           port: 80
