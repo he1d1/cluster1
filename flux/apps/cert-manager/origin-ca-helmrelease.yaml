@@ -7,8 +7,8 @@ spec:
   interval: 12h
   chart:
     spec:
-      chart: origin-ca-issuer
+      chart: deploy/charts/origin-ca-issuer
       sourceRef:
-        kind: HelmRepository
+        kind: GitRepository
         name: cloudflare-origin-ca-issuer
   values: {}

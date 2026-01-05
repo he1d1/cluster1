@@ -1,8 +1,10 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
 metadata:
   name: cloudflare-origin-ca-issuer
   namespace: cert-manager
 spec:
   interval: 12h
-  url: https://cloudflare.github.io/origin-ca-issuer
+  url: https://github.com/cloudflare/origin-ca-issuer
+  ref:
+    branch: trunk
