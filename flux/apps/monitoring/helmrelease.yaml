@@ -54,7 +54,7 @@ spec:
             memory: 128Mi
 
     grafana:
-      adminPassword: admin  # Change this or use SOPS secret
+      adminPassword: admin # Change this or use SOPS secret
       resources:
         requests:
           cpu: 50m
@@ -65,16 +65,60 @@ spec:
         enabled: true
         storageClassName: longhorn
         size: 5Gi
+      additionalDataSources:
+        - name: Loki
+          type: loki
+          url: http://loki:3100
+          access: proxy
+          isDefault: false
+      dashboardProviders:
+        dashboardproviders.yaml:
+          apiVersion: 1
+          providers:
+            - name: grafana-dashboards
+              orgId: 1
+              folder: ""
+              type: file
+              disableDeletion: false
+              editable: true
+              options:
+                path: /var/lib/grafana/dashboards/grafana-dashboards
+      dashboards:
+        grafana-dashboards:
+          node-exporter:
+            gnetId: 1860
+            revision: 37
+            datasource: Prometheus
+          kubernetes-views-global:
+            gnetId: 15757
+            revision: 42
+            datasource: Prometheus
+          kubernetes-views-pods:
+            gnetId: 15760
+            revision: 36
+            datasource: Prometheus
+          flux-cluster:
+            gnetId: 16714
+            revision: 2
+            datasource: Prometheus
+          longhorn:
+            gnetId: 16888
+            revision: 9
+            datasource: Prometheus
+          loki-logs:
+            gnetId: 13639
+            revision: 2
+            datasource: Loki
 
     # Disable components not needed or too heavy for Pi cluster
     kubeEtcd:
-      enabled: false  # Talos manages etcd differently
+      enabled: false # Talos manages etcd differently
     kubeControllerManager:
-      enabled: false  # Not accessible in Talos
+      enabled: false # Not accessible in Talos
     kubeScheduler:
-      enabled: false  # Not accessible in Talos
+      enabled: false # Not accessible in Talos
     kubeProxy:
-      enabled: false  # Talos uses kube-proxy differently
+      enabled: false # Talos uses kube-proxy differently
 
     # Node exporter for host metrics
     nodeExporter:

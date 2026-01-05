@@ -9,3 +9,6 @@ resources:
   - helmrelease.yaml
   - httproute.yaml
   - networkpolicy.yaml
+  - loki-helmrepository.yaml
+  - loki-helmrelease.yaml
+  - promtail-helmrelease.yaml
