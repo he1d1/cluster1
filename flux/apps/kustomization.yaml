@@ -9,4 +9,5 @@ resources:
   - coredns
   - monitoring
   - promtail
+  - media
   - test
