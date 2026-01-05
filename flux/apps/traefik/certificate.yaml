@@ -9,5 +9,5 @@ spec:
     name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
-    - "*.cluster1.internal.heidi.codes"
-    - "cluster1.internal.heidi.codes"
+    - "*.apps.cluster1.internal.heidi.codes"
+    - "apps.cluster1.internal.heidi.codes"
