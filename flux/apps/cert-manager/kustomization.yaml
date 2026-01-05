@@ -10,3 +10,5 @@ resources:
   - helmrelease.yaml
   - cloudflaresecret.sops.yaml
   - certs/clusterissuer.yaml
+  - origin-ca-helmrepo.yaml
+  - origin-ca-helmrelease.yaml
