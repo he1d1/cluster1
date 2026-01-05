@@ -11,3 +11,4 @@ resources:
   - networkpolicy.yaml
   - loki-helmrepository.yaml
   - loki-helmrelease.yaml
+  - loki-dashboard.yaml

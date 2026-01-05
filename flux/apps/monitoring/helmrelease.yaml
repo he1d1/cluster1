@@ -131,6 +131,11 @@ spec:
 
     # Node exporter for host metrics
     nodeExporter:
+      operatingSystems:
+        darwin:
+          enabled: false
+        aix:
+          enabled: false
       resources:
         requests:
           cpu: 10m
