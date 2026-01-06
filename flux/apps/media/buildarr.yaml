@@ -88,7 +88,7 @@ data:
             NZBGet:
               type: nzbget
               enable: true
-              hostname: nzbget.apps.cluster1.internal.heidi.codes
+              host: nzbget.apps.cluster1.internal.heidi.codes
               port: 443
               use_ssl: true
               username: nzbget
@@ -110,7 +110,7 @@ data:
             NZBGet:
               type: nzbget
               enable: true
-              hostname: nzbget.apps.cluster1.internal.heidi.codes
+              host: nzbget.apps.cluster1.internal.heidi.codes
               port: 443
               use_ssl: true
               username: nzbget
