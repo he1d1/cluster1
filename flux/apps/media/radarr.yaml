@@ -15,6 +15,15 @@ spec:
       labels:
         app: radarr
     spec:
+      dnsPolicy: "None"
+      dnsConfig:
+        nameservers:
+          - "1.1.1.1"
+          - "8.8.8.8"
+        searches:
+          - media.svc.cluster.local
+          - svc.cluster.local
+          - cluster.local
       containers:
         - name: radarr
           image: lscr.io/linuxserver/radarr:latest

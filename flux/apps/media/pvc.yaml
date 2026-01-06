@@ -1,26 +1,26 @@
 ---
-# Shared media storage for all *arr apps and Jellyfin
+# Shared media storage for all *arr apps and Jellyfin (RWX for multi-pod access)
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: media-data
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   storageClassName: longhorn
   resources:
     requests:
-      storage: 100Gi
+      storage: 10Gi
 ---
-# Downloads directory (shared between download client and *arr apps)
+# Downloads directory (RWX - shared between download client and *arr apps)
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: downloads
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   storageClassName: longhorn
   resources:
     requests:
-      storage: 50Gi
+      storage: 10Gi

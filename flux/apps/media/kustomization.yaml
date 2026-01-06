@@ -6,8 +6,10 @@ namespace: media
 resources:
   - namespace.yaml
   - pvc.yaml
+  - secrets.sops.yaml
+  - prowlarr.yaml
   - sonarr.yaml
   - radarr.yaml
-  - prowlarr.yaml
   - jellyfin.yaml
   - nzbget.yaml
+  - buildarr.yaml

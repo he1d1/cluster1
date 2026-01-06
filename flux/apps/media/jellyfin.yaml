@@ -15,6 +15,15 @@ spec:
       labels:
         app: jellyfin
     spec:
+      dnsPolicy: "None"
+      dnsConfig:
+        nameservers:
+          - "1.1.1.1"
+          - "8.8.8.8"
+        searches:
+          - media.svc.cluster.local
+          - svc.cluster.local
+          - cluster.local
       containers:
         - name: jellyfin
           image: lscr.io/linuxserver/jellyfin:latest
@@ -57,7 +66,7 @@ spec:
   storageClassName: longhorn
   resources:
     requests:
-      storage: 5Gi
+      storage: 2Gi
 ---
 apiVersion: v1
 kind: Service

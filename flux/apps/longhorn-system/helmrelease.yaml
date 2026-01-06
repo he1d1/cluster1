@@ -14,3 +14,9 @@ spec:
         name: longhorn-repo
       version: v1.10.1
   interval: 1m0s
+  values:
+    defaultSettings:
+      # Required for RWX volumes
+      defaultDataLocality: disabled
+    persistence:
+      defaultClassReplicaCount: 2

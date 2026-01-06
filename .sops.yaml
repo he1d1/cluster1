@@ -2,8 +2,8 @@
 creation_rules:
   - age: >-
       age1z2njmd0924r7k73djmkhg4h9vyg9nnfslm7fpr23ktlksw65z5mq0yels5
-    path_regex: '(^|/)flux/.*'
-    encrypted_regex: '^(data|stringData)$'
+    path_regex: "(^|/)flux/.*"
+    encrypted_regex: "^(data|stringData)$"
   - age: >-
       age1z2njmd0924r7k73djmkhg4h9vyg9nnfslm7fpr23ktlksw65z5mq0yels5
-    path_regex: '(^|/)talos/.*'
+    path_regex: "(^|/)talos/.*"
