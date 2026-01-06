@@ -34,7 +34,7 @@ data:
                 priority: 25
                 url: https://api.nzbgeek.info
                 api_path: /api
-                api_key: !env_var NZBGEEK_API_KEY
+                api_key: ${nzbgeek-api-key}
                 categories:
                   - TV/WEB-DL
                   - TV/Foreign
@@ -92,7 +92,7 @@ data:
               port: 443
               use_ssl: true
               username: nzbget
-              password: !env_var NZBGET_PASSWORD
+              password: ${nzbget-password}
               category: prowlarr
               priority: 50
 
@@ -114,7 +114,7 @@ data:
               port: 443
               use_ssl: true
               username: nzbget
-              password: !env_var NZBGET_PASSWORD
+              password: ${nzbget-password}
               category: sonarr
               priority: 50
 
@@ -136,7 +136,7 @@ data:
               port: 443
               use_ssl: true
               username: nzbget
-              password: !env_var NZBGET_PASSWORD
+              password: ${nzbget-password}
               category: radarr
               priority: 50
 ---
@@ -169,17 +169,6 @@ spec:
         - name: buildarr
           image: callum027/buildarr:latest
           args: ["daemon", "/config/buildarr.yml"]
-          env:
-            - name: NZBGEEK_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: buildarr-secrets
-                  key: nzbgeek-api-key
-            - name: NZBGET_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: buildarr-secrets
-                  key: nzbget-password
           resources:
             requests:
               cpu: 10m

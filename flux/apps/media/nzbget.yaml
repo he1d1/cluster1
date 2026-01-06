@@ -7,11 +7,11 @@ data:
   nzbget.conf: |
     # Directories
     MainDir=/downloads
-    DestDir=${MainDir}/completed
-    InterDir=${MainDir}/intermediate
-    NzbDir=${MainDir}/nzb
-    QueueDir=${MainDir}/queue
-    TempDir=${MainDir}/tmp
+    DestDir=$${MainDir}/completed
+    InterDir=$${MainDir}/intermediate
+    NzbDir=$${MainDir}/nzb
+    QueueDir=$${MainDir}/queue
+    TempDir=$${MainDir}/tmp
     ScriptDir=/app/nzbget/scripts
 
     # Newshosting Server
@@ -20,7 +20,7 @@ data:
     Server1.Host=news.newshosting.com
     Server1.Port=563
     Server1.Username=74z67niu5
-    Server1.Password=${NEWSHOSTING_PASSWORD}
+    Server1.Password=${newshosting-password}
     Server1.Encryption=yes
     Server1.Connections=30
     Server1.Retention=5800
@@ -29,15 +29,15 @@ data:
 
     # Categories
     Category1.Name=sonarr
-    Category1.DestDir=${MainDir}/completed/sonarr
+    Category1.DestDir=$${MainDir}/completed/sonarr
     Category2.Name=radarr
-    Category2.DestDir=${MainDir}/completed/radarr
+    Category2.DestDir=$${MainDir}/completed/radarr
     Category3.Name=prowlarr
-    Category3.DestDir=${MainDir}/completed/prowlarr
+    Category3.DestDir=$${MainDir}/completed/prowlarr
 
     # Security
     ControlUsername=nzbget
-    ControlPassword=${NZBGET_PASSWORD}
+    ControlPassword=${nzbget-password}
     AuthorizedIP=
     DaemonUsername=
 
@@ -107,32 +107,6 @@ spec:
           - media.svc.cluster.local
           - svc.cluster.local
           - cluster.local
-      initContainers:
-        - name: init-config
-          image: busybox:latest
-          command:
-            - sh
-            - -c
-            - |
-              cp /config-template/nzbget.conf /config/nzbget.conf
-              sed -i "s/\${NEWSHOSTING_PASSWORD}/$NEWSHOSTING_PASSWORD/g" /config/nzbget.conf
-              sed -i "s/\${NZBGET_PASSWORD}/$NZBGET_PASSWORD/g" /config/nzbget.conf
-          env:
-            - name: NEWSHOSTING_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: nzbget-secrets
-                  key: newshosting-password
-            - name: NZBGET_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: nzbget-secrets
-                  key: nzbget-password
-          volumeMounts:
-            - name: config-template
-              mountPath: /config-template
-            - name: config
-              mountPath: /config
       containers:
         - name: nzbget
           image: lscr.io/linuxserver/nzbget:latest
@@ -157,11 +131,9 @@ spec:
             - name: downloads
               mountPath: /downloads
       volumes:
-        - name: config-template
+        - name: config
           configMap:
             name: nzbget-config
-        - name: config
-          emptyDir: {}
         - name: downloads
           persistentVolumeClaim:
             claimName: downloads

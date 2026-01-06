@@ -9,6 +9,7 @@ This is a GitOps repository for a 3-node Raspberry Pi Kubernetes cluster running
 ## Key Technologies
 
 - **Talos OS** (v1.11.5): Immutable Kubernetes-focused operating system
+- **Talhelper**: Generates Talos machine configs from talconfig.yaml
 - **Kubernetes** (v1.34.1): Container orchestration
 - **Flux CD**: GitOps continuous delivery - reconciles cluster state from this repo
 - **SOPS + Age**: Secret encryption in git
@@ -30,9 +31,9 @@ flux/
     └── traefik/         # Ingress controller
 
 talos/
-├── talconfig.yaml       # Cluster definition (nodes, network, extensions)
+├── talconfig.yaml       # Talhelper cluster definition (nodes, network, extensions)
 ├── talsecret.sops.yaml  # Encrypted Talos secrets
-└── clusterconfig/       # Generated per-node machine configs
+└── clusterconfig/       # Generated per-node machine configs (via talhelper genconfig)
 ```
 
 ## Working with Secrets
@@ -85,8 +86,7 @@ This runs on Raspberry Pi hardware. Keep resource requests/limits conservative:
 
 Changes pushed to this repo are automatically applied by Flux. To force reconciliation:
 ```bash
-flux reconcile source git flux-system
-flux reconcile kustomization flux-system
+flux reconcile kustomization flux-system --with-source
 ```
 
 Check status:
