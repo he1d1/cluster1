@@ -9,5 +9,5 @@ resources:
   - coredns
   - monitoring
   - promtail
-  - media/ks.yaml
+  - media
   - test

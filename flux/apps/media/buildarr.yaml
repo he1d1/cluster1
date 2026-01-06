@@ -34,7 +34,7 @@ data:
                 priority: 25
                 url: https://api.nzbgeek.info
                 api_path: /api
-                api_key: ${nzbgeek-api-key}
+                api_key: __NZBGEEK_API_KEY__
                 categories:
                   - TV/WEB-DL
                   - TV/Foreign
@@ -92,7 +92,7 @@ data:
               port: 443
               use_ssl: true
               username: nzbget
-              password: ${nzbget-password}
+              password: __NZBGET_PASSWORD__
               category: prowlarr
               priority: 50
 
@@ -114,7 +114,7 @@ data:
               port: 443
               use_ssl: true
               username: nzbget
-              password: ${nzbget-password}
+              password: __NZBGET_PASSWORD__
               category: sonarr
               priority: 50
 
@@ -136,7 +136,7 @@ data:
               port: 443
               use_ssl: true
               username: nzbget
-              password: ${nzbget-password}
+              password: __NZBGET_PASSWORD__
               category: radarr
               priority: 50
 ---
@@ -165,6 +165,32 @@ spec:
           - media.svc.cluster.local
           - svc.cluster.local
           - cluster.local
+      initContainers:
+        - name: init-config
+          image: busybox:latest
+          command:
+            - sh
+            - -c
+            - |
+              cp /config-template/buildarr.yml /config/buildarr.yml
+              sed -i "s/__NZBGEEK_API_KEY__/$NZBGEEK_API_KEY/g" /config/buildarr.yml
+              sed -i "s/__NZBGET_PASSWORD__/$NZBGET_PASSWORD/g" /config/buildarr.yml
+          env:
+            - name: NZBGEEK_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: buildarr-secrets
+                  key: nzbgeek-api-key
+            - name: NZBGET_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: buildarr-secrets
+                  key: nzbget-password
+          volumeMounts:
+            - name: config-template
+              mountPath: /config-template
+            - name: config
+              mountPath: /config
       containers:
         - name: buildarr
           image: callum027/buildarr:latest
@@ -179,6 +205,8 @@ spec:
             - name: config
               mountPath: /config
       volumes:
-        - name: config
+        - name: config-template
           configMap:
             name: buildarr-config
+        - name: config
+          emptyDir: {}
