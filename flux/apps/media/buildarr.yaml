@@ -22,6 +22,7 @@ data:
       hostname: prowlarr.apps.cluster1.internal.heidi.codes
       port: 443
       protocol: https
+      api_key: __PROWLARR_API_KEY__
       settings:
         indexers:
           indexers:
@@ -59,7 +60,7 @@ data:
                 prowlarr_sync: full-sync
                 prowlarr_url: https://prowlarr.apps.cluster1.internal.heidi.codes
                 base_url: https://sonarr.apps.cluster1.internal.heidi.codes
-                instance_name: sonarr
+                api_key: __SONARR_API_KEY__
                 sync_categories:
                   - TV/WEB-DL
                   - TV/Foreign
@@ -72,7 +73,7 @@ data:
                 prowlarr_sync: full-sync
                 prowlarr_url: https://prowlarr.apps.cluster1.internal.heidi.codes
                 base_url: https://radarr.apps.cluster1.internal.heidi.codes
-                instance_name: radarr
+                api_key: __RADARR_API_KEY__
                 sync_categories:
                   - Movies/Foreign
                   - Movies/Other
@@ -100,6 +101,7 @@ data:
       hostname: sonarr.apps.cluster1.internal.heidi.codes
       port: 443
       protocol: https
+      api_key: __SONARR_API_KEY__
       settings:
         media_management:
           root_folders:
@@ -122,6 +124,7 @@ data:
       hostname: radarr.apps.cluster1.internal.heidi.codes
       port: 443
       protocol: https
+      api_key: __RADARR_API_KEY__
       settings:
         media_management:
           root_folders:
@@ -175,6 +178,9 @@ spec:
               cp /config-template/buildarr.yml /config/buildarr.yml
               sed -i "s/__NZBGEEK_API_KEY__/$NZBGEEK_API_KEY/g" /config/buildarr.yml
               sed -i "s/__NZBGET_PASSWORD__/$NZBGET_PASSWORD/g" /config/buildarr.yml
+              sed -i "s/__PROWLARR_API_KEY__/$PROWLARR_API_KEY/g" /config/buildarr.yml
+              sed -i "s/__SONARR_API_KEY__/$SONARR_API_KEY/g" /config/buildarr.yml
+              sed -i "s/__RADARR_API_KEY__/$RADARR_API_KEY/g" /config/buildarr.yml
           env:
             - name: NZBGEEK_API_KEY
               valueFrom:
@@ -186,6 +192,21 @@ spec:
                 secretKeyRef:
                   name: buildarr-secrets
                   key: nzbget-password
+            - name: PROWLARR_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: buildarr-secrets
+                  key: prowlarr-api-key
+            - name: SONARR_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: buildarr-secrets
+                  key: sonarr-api-key
+            - name: RADARR_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: buildarr-secrets
+                  key: radarr-api-key
           volumeMounts:
             - name: config-template
               mountPath: /config-template
